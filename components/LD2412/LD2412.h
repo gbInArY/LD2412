@@ -101,7 +101,7 @@ static const std::map<uint8_t, std::string> DISTANCE_RESOLUTION_INT_TO_ENUM{{DIS
 //   LIGHT_FUNCTION_BELOW = 0x01,
 //   LIGHT_FUNCTION_ABOVE = 0x02
 // };
-// 
+//
 // static const std::map<std::string, uint8_t> LIGHT_FUNCTION_ENUM_TO_INT{
 //     {"off", LIGHT_FUNCTION_OFF}, {"below", LIGHT_FUNCTION_BELOW}, {"above", LIGHT_FUNCTION_ABOVE}};
 // static const std::map<uint8_t, std::string> LIGHT_FUNCTION_INT_TO_ENUM{
@@ -125,7 +125,7 @@ static const uint8_t CMD_FRAME_END[4] = {0x04, 0x03, 0x02, 0x01};
 static const uint8_t DATA_FRAME_HEADER[4] = {0xF4, 0xF3, 0xF2, 0xF1};
 static const uint8_t DATA_FRAME_END[4] = {0xF8, 0xF7, 0xF6, 0xF5};
 
-static const char HEX_POSITIONING_CONVERSION[] = "0123456789ABCDEF"; 
+static const char HEX_POSITIONING_CONVERSION[] = "0123456789ABCDEF";
 
 /*
 Data Type: 6th byte

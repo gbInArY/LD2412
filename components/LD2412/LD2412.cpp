@@ -221,29 +221,29 @@ void LD2412Component::handle_periodic_data_(uint8_t *buffer, int len) {
   */
 #ifdef USE_SENSOR
   if (this->moving_target_distance_sensor_ != nullptr) {
-    int new_moving_target_distance = target_state != 0x00 ? 
+    int new_moving_target_distance = target_state != 0x00 ?
       this->two_byte_to_int_(buffer[MOVING_TARGET_LOW], buffer[MOVING_TARGET_HIGH]) :
       0;
     if (this->moving_target_distance_sensor_->get_state() != new_moving_target_distance)
       this->moving_target_distance_sensor_->publish_state(new_moving_target_distance);
   }
   if (this->moving_target_energy_sensor_ != nullptr) {
-    int new_moving_target_energy = target_state != 0x00 ? 
+    int new_moving_target_energy = target_state != 0x00 ?
       buffer[MOVING_ENERGY] :
       0;
     if (this->moving_target_energy_sensor_->get_state() != new_moving_target_energy)
       this->moving_target_energy_sensor_->publish_state(new_moving_target_energy);
   }
   if (this->still_target_distance_sensor_ != nullptr) {
-    int new_still_target_distance = target_state != 0x00 ? 
-      this->two_byte_to_int_(buffer[STILL_TARGET_LOW], buffer[STILL_TARGET_HIGH]) : 
+    int new_still_target_distance = target_state != 0x00 ?
+      this->two_byte_to_int_(buffer[STILL_TARGET_LOW], buffer[STILL_TARGET_HIGH]) :
       0;
     if (this->still_target_distance_sensor_->get_state() != new_still_target_distance)
       this->still_target_distance_sensor_->publish_state(new_still_target_distance);
   }
   if (this->still_target_energy_sensor_ != nullptr) {
-    int new_still_target_energy = target_state != 0x00 ? 
-      buffer[STILL_ENERGY] : 
+    int new_still_target_energy = target_state != 0x00 ?
+      buffer[STILL_ENERGY] :
       0;
     if (this->still_target_energy_sensor_->get_state() != new_still_target_energy)
       this->still_target_energy_sensor_->publish_state(new_still_target_energy);
@@ -283,7 +283,7 @@ void LD2412Component::handle_periodic_data_(uint8_t *buffer, int len) {
       Light sensor: 38th bytes
     */
     if (this->light_sensor_ != nullptr) {
-      int new_light_sensor = (buffer[LIGHT_SENSOR]*100)/255;
+      int new_light_sensor = (buffer[LIGHT_SENSOR] * 100) / 255;
       if (this->light_sensor_->get_state() != new_light_sensor)
         this->light_sensor_->publish_state(new_light_sensor);
     }
@@ -723,11 +723,10 @@ void LD2412Component::set_basic_config() {
 }
 #endif
 
-
 #ifdef USE_NUMBER
 void LD2412Component::set_basic_config() {
   if (
-      !this->min_distance_gate_number_->has_state() || 
+      !this->min_distance_gate_number_->has_state() ||
       !this->max_distance_gate_number_->has_state() ||
       !this->timeout_number_->has_state() ||
       !this->out_pin_level_select_->has_state()) {
@@ -794,6 +793,7 @@ void LD2412Component::get_gate_threshold() {
   delay(50);  // NOLINT
   this->set_config_mode_(false);
 }
+
 void LD2412Component::set_gate_still_threshold_number(int gate, number::Number *n) {
   this->gate_still_threshold_numbers_[gate] = n;
 }
