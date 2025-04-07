@@ -48,7 +48,6 @@ static const uint8_t CMD_SET_DISTANCE_RESOLUTION = 0x0001;
 static const uint8_t CMD_QUERY_LIGHT_CONTROL = 0x00AE;
 static const uint8_t CMD_SET_LIGHT_CONTROL = 0x00AD;
 static const uint8_t CMD_SET_BAUD_RATE = 0x00A1;
-static const uint8_t CMD_BT_PASSWORD = 0x00A9;
 static const uint8_t CMD_MAC = 0x00A5;
 static const uint8_t CMD_RESET = 0x00A2;
 static const uint8_t CMD_RESTART = 0x00A3;

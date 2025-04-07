@@ -488,9 +488,6 @@ bool LD2412Component::handle_ack_data_(uint8_t *buffer, int len) {
 //    case lowbyte(CMD_SET_LIGHT_CONTROL):
 //      ESP_LOGV(TAG, "Handled set light control command");
 //      break;
-//    case lowbyte(CMD_BT_PASSWORD):
-//      ESP_LOGV(TAG, "Handled set bluetooth password command");
-//      break;
     case lowbyte(CMD_QUERY_MOTION_GATE_SENS):{
       std::vector<std::function<void(void)>> updates;
 #ifdef USE_NUMBER
@@ -673,18 +670,6 @@ void LD2412Component::query_dymanic_background_correction_(){
   this->send_command_(CMD_QUEY_DYNAMIC_BACKGROUND_CORRECTION, nullptr, 0);
   this->set_config_mode_(false);
 }
-
-// void LD2412Component::set_bluetooth_password(const std::string &password) {
-//   if (password.length() != 6) {
-//     ESP_LOGE(TAG, "set_bluetooth_password(): invalid password length, must be exactly 6 chars '%s'", password.c_str());
-//     return;
-//   }
-//   this->set_config_mode_(true);
-//   uint8_t cmd_value[6];
-//   std::copy(password.begin(), password.end(), std::begin(cmd_value));
-//   this->send_command_(CMD_BT_PASSWORD, cmd_value, 6);
-//   this->set_config_mode_(false);
-// }
 
 void LD2412Component::set_engineering_mode(bool enable) {
   this->set_config_mode_(true);
