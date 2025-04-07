@@ -27,7 +27,7 @@ void LD2412Component::dump_config() {
   LOG_BINARY_SENSOR("  ", "OutPinPresenceStatusBinarySensor", this->out_pin_presence_status_binary_sensor_);
 #endif
 #ifdef USE_SWITCH
-//  LOG_SWITCH("  ", "BluetoothSwitch", this->bluetooth_switch_);
+  LOG_SWITCH("  ", "BluetoothSwitch", this->bluetooth_switch_);
 #endif
 #ifdef USE_BUTTON
   LOG_BUTTON("  ", "ResetButton", this->reset_button_);
@@ -35,7 +35,7 @@ void LD2412Component::dump_config() {
   LOG_BUTTON("  ", "QueryButton", this->query_button_);
 #endif
 #ifdef USE_SENSOR
-  //LOG_SENSOR("  ", "LightSensor", this->light_sensor_);
+  LOG_SENSOR("  ", "LightSensor", this->light_sensor_);
   LOG_SENSOR("  ", "MovingTargetDistanceSensor", this->moving_target_distance_sensor_);
   LOG_SENSOR("  ", "StillTargetDistanceSensor", this->still_target_distance_sensor_);
   LOG_SENSOR("  ", "MovingTargetEnergySensor", this->moving_target_energy_sensor_);
@@ -114,7 +114,7 @@ void LD2412Component::read_all_info() {
 void LD2412Component::restart_and_read_all_info() {
   this->set_config_mode_(true);
   this->restart_();
-  this->set_timeout(1000, [this]() { this->read_all_info(); });
+  this->set_timeout(2000, [this]() { this->read_all_info(); });
 }
 
 void LD2412Component::loop() {
@@ -280,8 +280,7 @@ void LD2412Component::handle_periodic_data_(uint8_t *buffer, int len) {
       if (this->light_sensor_->get_state() != new_light_sensor)
         this->light_sensor_->publish_state(new_light_sensor);
     }
-  } 
-  if(!engineering_mode) {
+  } else {
     for (auto *s : this->gate_move_sensors_) {
       if (s != nullptr && !std::isnan(s->get_state())) {
         s->publish_state(NAN);
@@ -296,7 +295,6 @@ void LD2412Component::handle_periodic_data_(uint8_t *buffer, int len) {
       this->light_sensor_->publish_state(NAN);
     }
   }
-  //}
 #endif
 #ifdef USE_BINARY_SENSOR
   if (engineering_mode) {
@@ -378,7 +376,6 @@ bool LD2412Component::handle_ack_data_(uint8_t *buffer, int len) {
     ESP_LOGE(TAG, "Error with last command , last buffer was: %u , %u", buffer[8], buffer[9]);
     return true;
   }
-  bool dynamic_background_correction_active;
   switch (buffer[COMMAND]) {
     case lowbyte(CMD_ENABLE_CONF):
       ESP_LOGV(TAG, "Handled Enable conf command");
@@ -459,6 +456,7 @@ bool LD2412Component::handle_ack_data_(uint8_t *buffer, int len) {
       break;
     case lowbyte(CMD_QUEY_DYNAMIC_BACKGROUND_CORRECTION):
       ESP_LOGV(TAG, "Handled query dynamic background correction");
+      bool dynamic_background_correction_active;
       dynamic_background_correction_active = (buffer[10] == 0x01);
 #ifdef USE_SELECT
       if(this->dynamic_bakground_correction_active_ != dynamic_background_correction_active && dynamic_background_correction_active){
@@ -472,9 +470,9 @@ bool LD2412Component::handle_ack_data_(uint8_t *buffer, int len) {
         this->set_timeout(1000, [this]() { this->query_dymanic_background_correction_(); });
       }
       break;
-//    case lowbyte(CMD_BLUETOOTH):
-//      ESP_LOGV(TAG, "Handled bluetooth command");
-//      break;
+    case lowbyte(CMD_BLUETOOTH):
+      ESP_LOGV(TAG, "Handled bluetooth command");
+      break;
 //    case lowbyte(CMD_SET_LIGHT_CONTROL):
 //      ESP_LOGV(TAG, "Handled set light control command");
 //      break;

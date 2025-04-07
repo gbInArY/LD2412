@@ -44,8 +44,8 @@ static const uint8_t CMD_BASIC_CONF = 0x0002;
 static const uint8_t CMD_VERSION = 0x00A0;
 static const uint8_t CMD_QUERY_DISTANCE_RESOLUTION = 0x0011;
 static const uint8_t CMD_SET_DISTANCE_RESOLUTION = 0x0001;
-static const uint8_t CMD_QUERY_LIGHT_CONTROL = 0x00AE;
-static const uint8_t CMD_SET_LIGHT_CONTROL = 0x00AD;
+// static const uint8_t CMD_QUERY_LIGHT_CONTROL = 0x001C;
+// static const uint8_t CMD_SET_LIGHT_CONTROL = 0x000C;
 static const uint8_t CMD_SET_BAUD_RATE = 0x00A1;
 static const uint8_t CMD_MAC = 0x00A5;
 static const uint8_t CMD_RESET = 0x00A2;
@@ -148,7 +148,7 @@ enum PeriodicDataStructure : uint8_t {
   LIGHT_SENSOR = 45,
   OUT_PIN_SENSOR = 38,
 };
-enum PeriodicDataValue : uint8_t { HEAD = 0XAA, END = 0x55, CHECK = 0x00 };
+enum PeriodicDataValue : uint8_t { HEAD = 0xAA, END = 0x55, CHECK = 0x00 };
 
 enum AckDataStructure : uint8_t { COMMAND = 6, COMMAND_STATUS = 7 };
 

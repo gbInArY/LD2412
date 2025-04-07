@@ -104,12 +104,11 @@ CONFIG_SCHEMA = CONFIG_SCHEMA.extend(
     }
 )
 
-
 async def to_code(config):
     LD2412_component = await cg.get_variable(config[CONF_LD2412_ID])
     if timeout_config := config.get(CONF_TIMEOUT):
         n = await number.new_number(
-            timeout_config, min_value=0, max_value=900, step=1
+            timeout_config, min_value=1, max_value=900, step=1
         )
         await cg.register_parented(n, config[CONF_LD2412_ID])
         cg.add(LD2412_component.set_timeout_number(n))
