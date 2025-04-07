@@ -27,7 +27,6 @@ void LD2412Component::dump_config() {
   LOG_BINARY_SENSOR("  ", "OutPinPresenceStatusBinarySensor", this->out_pin_presence_status_binary_sensor_);
 #endif
 #ifdef USE_SWITCH
-//  LOG_SWITCH("  ", "EngineeringModeSwitch", this->engineering_mode_switch_);
 //  LOG_SWITCH("  ", "BluetoothSwitch", this->bluetooth_switch_);
 #endif
 #ifdef USE_BUTTON
@@ -187,12 +186,6 @@ void LD2412Component::handle_periodic_data_(uint8_t *buffer, int len) {
   }
 #endif
 
-//#ifdef USE_SWITCH
-//  if (this->engineering_mode_switch_ != nullptr &&
-//      current_millis - last_engineering_mode_change_millis_ > this->throttle_) {
-//    this->engineering_mode_switch_->publish_state(engineering_mode);
-//  }
-//#endif
   char target_state = buffer[TARGET_STATES];
 #ifdef USE_BINARY_SENSOR
   /*
@@ -479,9 +472,6 @@ bool LD2412Component::handle_ack_data_(uint8_t *buffer, int len) {
         this->set_timeout(1000, [this]() { this->query_dymanic_background_correction_(); });
       }
       break;
-//    case lowbyte(CMD_GATE_SENS):
-//      ESP_LOGV(TAG, "Handled sensitivity command");
-//      break;
 //    case lowbyte(CMD_BLUETOOTH):
 //      ESP_LOGV(TAG, "Handled bluetooth command");
 //      break;

@@ -41,7 +41,6 @@ static const uint8_t CMD_DISABLE_ENG = 0x0063;
 static const uint8_t CMD_MAXDIST_DURATION = 0x0060;
 static const uint8_t CMD_QUERY = 0x0012;
 static const uint8_t CMD_BASIC_CONF = 0x0002;
-static const uint8_t CMD_GATE_SENS = 0x0064;
 static const uint8_t CMD_VERSION = 0x00A0;
 static const uint8_t CMD_QUERY_DISTANCE_RESOLUTION = 0x0011;
 static const uint8_t CMD_SET_DISTANCE_RESOLUTION = 0x0001;
